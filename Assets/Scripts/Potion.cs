@@ -24,10 +24,16 @@ public class Potion : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D trigger) {
+		if (trigger.tag == "PotionCheck") {
+			Machine.Instance.CheckPotion (this);
+		}
+	}
+
 	void OnTriggerStay2D(Collider2D trigger) {
 		if (trigger.tag == "Belt") {
 			if (body.velocity.x > -1f) {
-				body.velocity += Vector2.left * 0.1f;
+				body.velocity += Vector2.left * 0.1f * Machine.Instance.beltSpeed;
 			}
 //			body.AddForce(Vector2.left, ForceMode2D.Force);
 		}
@@ -56,5 +62,17 @@ public class Potion : MonoBehaviour {
 
 		liquidSprite.color = new Color(r/colorTotal*colorNum, g/colorTotal*colorNum, b/colorTotal*colorNum);
 		liquidSprite.size = new Vector2(1f, Mathf.Min(colorTotal * 0.0075f, 1f));
+	}
+
+	public float GradePotion(Color c) {
+		float rdiff = Mathf.Abs (liquidSprite.color.r - c.r);
+		float gdiff = Mathf.Abs (liquidSprite.color.g - c.g);
+		float bdiff = Mathf.Abs (liquidSprite.color.b - c.b);
+
+		return 1f - (rdiff + gdiff + bdiff) / 3f;
+	}
+
+	public float FillGrade() {
+		return Mathf.Min (colorTotal, 130) / 130f;
 	}
 }

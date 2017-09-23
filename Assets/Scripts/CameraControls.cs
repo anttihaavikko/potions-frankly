@@ -5,6 +5,7 @@ public class CameraControls : MonoBehaviour {
 
 	public float mouseSensitivity = 0.02f;
 	private Vector3 lastPosition;
+	private float zoom = -30f;
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +14,11 @@ public class CameraControls : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Camera.main.orthographicSize -= Input.GetAxis ("Mouse ScrollWheel");
+		zoom += Input.GetAxis ("Mouse ScrollWheel");
+
+		zoom = Mathf.Clamp (zoom, -30f, -7f);
+
+		transform.position = new Vector3 (transform.position.x, transform.position.y, zoom);
 
 		if (Input.GetMouseButtonDown(1)) {
 			lastPosition = Input.mousePosition;
