@@ -50,20 +50,25 @@ public class Character : MonoBehaviour {
 
 	public void ShowRecipe(Color c1, Color c2, Color c3) {
 
-		bubble.CenterIcons ();
+		int potionCount = 0;
 
 		bubble.ShowSpeech (" ");
 		
 		if (c1 != Color.black) {
 			bubble.AddPotion (c1);
+			potionCount++;
 		}
 
 		if (c2 != Color.black) {
 			bubble.AddPotion (c2);
+			potionCount++;
 		}
 
 		if (c3 != Color.black) {
 			bubble.AddPotion (c3);
+			potionCount++;
 		}
+
+		bubble.CenterIcons (potionCount);
 	}
 }

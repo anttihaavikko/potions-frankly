@@ -118,7 +118,8 @@ public class SpeechBubble : MonoBehaviour {
 		numberOfPotions++;
 	}
 
-	public void CenterIcons() {
-		potionRow.localPosition = new Vector3 (potionRow.localPosition.x, 17, potionRow.localPosition.z);
+	public void CenterIcons(int num) {
+		float xPos = (num == 2) ? 9f : 0f;
+		potionRow.localPosition = new Vector3 (xPos, 17, potionRow.localPosition.z);
 	}
 }

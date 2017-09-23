@@ -151,11 +151,11 @@ public class Machine : MonoBehaviour {
 
 		recipesDone [0] = false;
 		recipesDone [1] = false;
-		recipesDone [2] = false;
+		recipesDone [2] = true;
 
 		targetColors.Add (Color.magenta);
 		targetColors.Add (Color.yellow);
-		targetColors.Add (Color.white);
+		targetColors.Add (Color.black);
 
 		frank.ShowRecipe (targetColors[0], targetColors[1], targetColors[2]);
 	}
