@@ -20,6 +20,12 @@ public class Dimmer : MonoBehaviour {
 
 		targetAlpha = 0f;
 		startAlpha = img.color.a;
+
+		Invoke ("DoDisable", dur);
+	}
+
+	private void DoDisable() {
+		gameObject.SetActive (false);
 	}
 
 	public void FadeIn(float dur) {

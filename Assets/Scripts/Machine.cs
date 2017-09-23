@@ -9,6 +9,7 @@ public class Machine : MonoBehaviour {
 	public Transform potionSpawn;
 
 	public Character frank;
+	public Character customer;
 
 	private Potion potionToCheck;
 
@@ -136,10 +137,27 @@ public class Machine : MonoBehaviour {
 
 					if (recipesDone [0] && recipesDone [1] && recipesDone [2]) {
 						Invoke ("FinishRecipe", 1.75f);
+						Invoke ("CustomerLeaves", 2f);
+
+						if (customerNumber < 3) {
+							Invoke ("CustomerEnters", 7f);
+						} else {
+							Invoke ("DoOutro", 5f);
+						}
+
+						customer.ThumbsUp ();
 					}
 				}
 			}
 		}
+	}
+
+	private void CustomerEnters() {
+		customer.GoIn ();
+	}
+
+	private void CustomerLeaves() {
+		customer.GoOut ();
 	}
 
 	private void DoOutro() {
@@ -148,8 +166,7 @@ public class Machine : MonoBehaviour {
 	}
 
 	private void FinishRecipe() {
-		frank.Say ("Good job!", 2f);
-		Invoke ("ShowNextRecipe", 3.5f);
+		frank.Say ("Thank you!\nCome again!", 2f);
 	}
 
 	private void BreakPotion() {
@@ -167,11 +184,6 @@ public class Machine : MonoBehaviour {
 
 	public void ShowNextRecipe() {
 		customerNumber++;
-
-		if (customerNumber > 3) {
-			Invoke ("DoOutro", 2f);
-			return;
-		}
 
 		targetColors.Clear ();
 

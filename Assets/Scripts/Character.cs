@@ -16,6 +16,9 @@ public class Character : MonoBehaviour {
 
 	public bool isFrank = false;
 
+	private float outX = -38f, inX = -31.5f;
+	private float targetX = 0f;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -24,6 +27,29 @@ public class Character : MonoBehaviour {
 		if (isFrank) {
 			DoIntro ();
 		}
+	}
+
+	public void GoIn() {
+		TurnAround ();
+		anim.SetBool ("walking", true);
+		Invoke ("CustomerEntry", 3f);
+		targetX = inX;
+	}
+
+	public void GoOut() {
+		TurnAround ();
+		anim.SetBool ("walking", true);
+		targetX = outX;
+	}
+
+	private void CustomerEntry() {
+		anim.SetBool ("walking", false);
+		anim.SetTrigger ("thumbsup");
+		Invoke ("DoOrder", 3f);
+	}
+
+	private void DoOrder() {
+		Machine.Instance.ShowNextRecipe ();
 	}
 
 	public void DoIntro() {
@@ -80,6 +106,10 @@ public class Character : MonoBehaviour {
 		ShowNextMessage ();
 	}
 
+	void TurnAround() {
+		transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+
 	void Update() {
 		if (isFrank) {
 			if (Input.GetMouseButtonDown (0)) {
@@ -91,10 +121,15 @@ public class Character : MonoBehaviour {
 					bubble.SkipMessage ();
 				}
 			}
+		} else {
+			if (targetX < 0f) {
+				transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targetX, transform.position.y, transform.position.z), Time.deltaTime * 2f);
+			}
 		}
 	}
 
 	private void EndDay() {
+		dimmer.gameObject.SetActive (true);
 		dimmer.FadeIn (1f);
 	}
 
@@ -116,7 +151,7 @@ public class Character : MonoBehaviour {
 			Machine.Instance.day++;
 		} else if (messages [curMessage] == "START") {
 			bubble.Hide ();
-			Machine.Instance.ShowNextRecipe ();
+			Machine.Instance.customer.GoIn ();
 		} else {
 			Say (messages [curMessage]);
 		}
