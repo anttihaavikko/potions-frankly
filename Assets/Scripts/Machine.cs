@@ -20,6 +20,10 @@ public class Machine : MonoBehaviour {
 	public float beltSpeed = 1f;
 	public Slider beltSpeedSlider;
 
+	private int customerNumber = 0;
+
+	public bool canSpawn = false;
+
 	private static Machine instance = null;
 	public static Machine Instance {
 		get { return instance; }
@@ -43,6 +47,8 @@ public class Machine : MonoBehaviour {
 		recipesDone [2] = true;
 
 		beltSpeedSlider.value = beltSpeed;
+
+		canSpawn = true;
 	}
 
 	public void SpawnPotion() {
@@ -147,20 +153,46 @@ public class Machine : MonoBehaviour {
 	}
 
 	private void ShowNextRecipe() {
+		customerNumber++;
+
 		targetColors.Clear ();
 
-		recipesDone [0] = false;
-		recipesDone [1] = false;
-		recipesDone [2] = true;
+		if (customerNumber % 3 == 1) {
+			targetColors.Add (GetRandomColor());
+			targetColors.Add (Color.black);
+			targetColors.Add (Color.black);
+		}
 
-		targetColors.Add (Color.magenta);
-		targetColors.Add (Color.yellow);
-		targetColors.Add (Color.black);
+		if (customerNumber % 3 == 2) {
+			targetColors.Add (GetRandomColor());
+			targetColors.Add (GetRandomColor());
+			targetColors.Add (Color.black);
+		}
+
+		if (customerNumber % 3 == 0) {
+			targetColors.Add (GetRandomColor());
+			targetColors.Add (GetRandomColor());
+			targetColors.Add (Color.cyan);
+		}
+
+		recipesDone [0] = (targetColors[0] == Color.black);
+		recipesDone [1] = (targetColors[1] == Color.black);
+		recipesDone [2] = (targetColors[2] == Color.black);
 
 		frank.ShowRecipe (targetColors[0], targetColors[1], targetColors[2]);
 	}
 
 	public void ChangeBeltSpeed() {
 		beltSpeed = beltSpeedSlider.value;
+	}
+
+	public Color GetRandomColor() {
+		List<Color> colors = new List<Color>();
+
+		colors.Add(Color.magenta);
+		colors.Add(Color.yellow);
+		colors.Add(Color.cyan);
+
+		return colors [Random.Range (0, colors.Count)];
 	}
 }

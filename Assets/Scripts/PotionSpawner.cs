@@ -21,8 +21,10 @@ public class PotionSpawner : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		pipeSize = new Vector3 (0.9f, 1.1f, 1f);
-		Machine.Instance.SpawnPotion ();
+		if (Machine.Instance.canSpawn) {
+			pipeSize = new Vector3 (0.9f, 1.1f, 1f);
+			Machine.Instance.SpawnPotion ();
+		}
 	}
 
 }
