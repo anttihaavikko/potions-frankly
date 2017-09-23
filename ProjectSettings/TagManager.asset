@@ -44,3 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Potions
+    uniqueID: 2909731033
+    locked: 0
+  - name: Walls
+    uniqueID: 656454477
+    locked: 0

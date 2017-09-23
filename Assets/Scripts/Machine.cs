@@ -21,9 +21,7 @@ public class Machine : MonoBehaviour {
 		}
 	}
 
-	void Update() {
-		if (Input.GetKeyDown (KeyCode.Q)) {
-			Instantiate (potionPrefab, potionSpawn.position, Quaternion.identity);
-		}
+	public void SpawnPotion() {
+		Instantiate (potionPrefab, potionSpawn.position, Quaternion.identity);
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Potion : MonoBehaviour {
 
 	private Rigidbody2D body;
-	private SpriteRenderer sprite;
+	public SpriteRenderer liquidSprite;
 	private float colorTimer = 2f;
 	private int colorAmount = 0;
 
@@ -15,7 +15,6 @@ public class Potion : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody2D> ();
-		sprite = GetComponent<SpriteRenderer> ();
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
@@ -55,6 +54,7 @@ public class Potion : MonoBehaviour {
 		colorNum = (g > 0f) ? colorNum + 1 : colorNum;
 		colorNum = (b > 0f) ? colorNum + 1 : colorNum;
 
-		sprite.color = new Color(r/colorTotal*colorNum, g/colorTotal*colorNum, b/colorTotal*colorNum);
+		liquidSprite.color = new Color(r/colorTotal*colorNum, g/colorTotal*colorNum, b/colorTotal*colorNum);
+		liquidSprite.size = new Vector2(1f, Mathf.Min(colorTotal * 0.0075f, 1f));
 	}
 }
