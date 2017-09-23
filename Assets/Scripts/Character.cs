@@ -7,10 +7,125 @@ public class Character : MonoBehaviour {
 	private Animator anim;
 	public SpeechBubble bubble;
 
+	private List<string> messages;
+	private int curMessage = 0;
+
+	public CameraControls cam;
+
+	public Dimmer dimmer;
+
+	public bool isFrank = false;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
-		TutorialRecipe ();
+		messages = new List<string> ();
+
+		if (isFrank) {
+			DoIntro ();
+		}
+	}
+
+	public void DoIntro() {
+
+		Machine.Instance.canSpawn = false;
+
+		cam.ZoomToStore ();
+
+		messages.Clear ();
+
+		// DAY 0 intro
+		if (Machine.Instance.day == 0) {
+			messages.Add ("Hello! My name is Frank.");
+			messages.Add ("I'm the owner of this fine establishment...");
+			messages.Add ("Potions, Frankly - the home of the most finest potions!");
+			messages.Add ("You make the potions and I'll sell 'em. Sound fair?");
+			messages.Add ("Oh yeah, my previous intern told me to leave this message...");
+			messages.Add ("I'm not quite sure what it means, but...");
+			messages.Add ("You can move the camera with right mouse button...");
+			messages.Add ("And zoom with mouse wheel.");
+			messages.Add ("...");
+			messages.Add ("TUTORIAL");
+			curMessage = 0;
+		}
+
+		// DAY 0 intro
+		if (Machine.Instance.day == 1) {
+			messages.Add ("First day! Are you excited?");
+			messages.Add ("Lets get to work...");
+			messages.Add ("START");
+			curMessage = 0;
+		}
+
+		ShowNextMessage ();
+	}
+
+	public void DoOutro() {
+
+		Machine.Instance.canSpawn = false;
+
+		cam.ZoomToStore ();
+
+		messages.Clear ();
+
+		// DAY 0 outro
+		if (Machine.Instance.day == 0) {
+			messages.Add ("Job well done!");
+			messages.Add ("Tomorrow we start serving actual customers.");
+			messages.Add ("See you in the morning!");
+			messages.Add ("FADE");
+			curMessage = 0;
+		}
+
+		ShowNextMessage ();
+	}
+
+	void Update() {
+		if (isFrank) {
+			if (Input.GetMouseButtonDown (0)) {
+				if (bubble.done) {
+					if (curMessage < messages.Count) {
+						ShowNextMessage ();
+					}
+				} else {
+					bubble.SkipMessage ();
+				}
+			}
+		}
+	}
+
+	private void EndDay() {
+		dimmer.FadeIn (1f);
+	}
+
+	private void StartDay() {
+		dimmer.FadeOut (2f);
+	}
+
+	private void ShowNextMessage() {
+
+		if (messages [curMessage] == "TUTORIAL") {
+			TutorialRecipe ();
+		} else if (messages [curMessage] == "FADE") {
+			bubble.Hide ();
+			Invoke ("DoIntro", 7f);
+
+			Invoke ("EndDay", 1.5f);
+			Invoke ("StartDay", 4.5f);
+
+			Machine.Instance.day++;
+		} else if (messages [curMessage] == "START") {
+			bubble.Hide ();
+			Machine.Instance.ShowNextRecipe ();
+		} else {
+			Say (messages [curMessage]);
+		}
+			
+		curMessage++;
+
+		if (curMessage >= messages.Count) {
+			Machine.Instance.canSpawn = true;
+		}
 	}
 
 	public void ThumbsUp() {

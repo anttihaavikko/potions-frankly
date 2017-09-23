@@ -24,6 +24,8 @@ public class Machine : MonoBehaviour {
 
 	public bool canSpawn = false;
 
+	public int day = 0;
+
 	private static Machine instance = null;
 	public static Machine Instance {
 		get { return instance; }
@@ -47,8 +49,6 @@ public class Machine : MonoBehaviour {
 		recipesDone [2] = true;
 
 		beltSpeedSlider.value = beltSpeed;
-
-		canSpawn = true;
 	}
 
 	public void SpawnPotion() {
@@ -56,11 +56,16 @@ public class Machine : MonoBehaviour {
 	}
 
 	public void CheckPotion(Potion potion) {
-		potionToCheck = potion;
-		if (tutorialMode) {
-			frank.HideBubble ();
+
+		if (Machine.Instance.canSpawn) {
+
+			potionToCheck = potion;
+			if (tutorialMode) {
+				frank.HideBubble ();
+			}
+
+			Invoke ("DoCheckPotion", 0.6f);
 		}
-		Invoke ("DoCheckPotion", 0.6f);
 	}
 
 	private void DoCheckPotion() {
@@ -119,9 +124,12 @@ public class Machine : MonoBehaviour {
 				Invoke ("BreakPotion", 1.5f);
 
 				if (tutorialMode) {
+					
 					frank.Say ("Nice!", 2f);
-					Invoke ("ShowNextRecipe", 3f);
 					tutorialMode = false;
+
+					Invoke ("DoOutro", 2f);
+
 				} else {
 					frank.bubble.potionImages [bestIndex].done = true;
 					recipesDone [bestIndex] = true;
@@ -132,6 +140,11 @@ public class Machine : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	private void DoOutro() {
+		customerNumber = 0;
+		frank.DoOutro ();
 	}
 
 	private void FinishRecipe() {
@@ -152,8 +165,13 @@ public class Machine : MonoBehaviour {
 		}
 	}
 
-	private void ShowNextRecipe() {
+	public void ShowNextRecipe() {
 		customerNumber++;
+
+		if (customerNumber > 3) {
+			Invoke ("DoOutro", 2f);
+			return;
+		}
 
 		targetColors.Clear ();
 

@@ -37,6 +37,7 @@ public class SpeechBubble : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (shown) {
 			transform.localScale = Vector3.MoveTowards (transform.localScale, shownSize, 0.03f);
 		} else {
@@ -61,13 +62,15 @@ public class SpeechBubble : MonoBehaviour {
 
 				Invoke ("ShowPotions", 0.12f);
 			}
-
-//			if (!done && Input.GetButtonDown("Action")) {
-//				done = true;
-//				messagePos = -1;
-//				textArea.text = message;
-//			}
 		}
+	}
+
+	public void SkipMessage() {
+		done = true;
+		messagePos = -1;
+		textArea.text = message;
+
+		Invoke ("ShowPotions", 0.12f);
 	}
 
 	public void ShowSpeech(string str) {
