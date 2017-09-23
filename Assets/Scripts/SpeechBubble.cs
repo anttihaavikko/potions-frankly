@@ -26,6 +26,8 @@ public class SpeechBubble : MonoBehaviour {
 
 	public Transform potionRow;
 
+	public GameObject clickHelp;
+
 	// Use this for initialization
 	void Awake () {
 		textArea.text = "";

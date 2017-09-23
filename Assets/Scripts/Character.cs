@@ -115,6 +115,7 @@ public class Character : MonoBehaviour {
 			if (Input.GetMouseButtonDown (0)) {
 				if (bubble.done) {
 					if (curMessage < messages.Count) {
+						bubble.clickHelp.SetActive (false);
 						ShowNextMessage ();
 					}
 				} else {
