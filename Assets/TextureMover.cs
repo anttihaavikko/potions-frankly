@@ -14,6 +14,6 @@ public class TextureMover : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		mat.mainTextureOffset += direction;
+		mat.mainTextureOffset += direction * Machine.Instance.beltSpeed;
 	}
 }

@@ -32,9 +32,10 @@ public class Potion : MonoBehaviour {
 
 	void OnTriggerStay2D(Collider2D trigger) {
 		if (trigger.tag == "Belt") {
-			if (body.velocity.x > -1f) {
-				body.velocity += Vector2.left * 0.1f * Machine.Instance.beltSpeed;
-			}
+			
+			float xVel = Mathf.MoveTowards (body.velocity.x, -Machine.Instance.beltSpeed, Time.deltaTime * 5f);
+			body.velocity = new Vector2(xVel, body.velocity.y);
+
 //			body.AddForce(Vector2.left, ForceMode2D.Force);
 		}
 

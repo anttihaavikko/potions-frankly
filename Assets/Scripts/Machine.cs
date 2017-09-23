@@ -13,6 +13,7 @@ public class Machine : MonoBehaviour {
 	private Potion potionToCheck;
 
 	private List<Color> targetColors;
+	private bool[] recipesDone;
 
 	private bool tutorialMode = true;
 
@@ -34,6 +35,14 @@ public class Machine : MonoBehaviour {
 
 		targetColors = new List<Color> ();
 		targetColors.Add (Color.yellow);
+
+		recipesDone = new bool[3];
+
+		recipesDone [0] = false;
+		recipesDone [1] = true;
+		recipesDone [2] = true;
+
+		beltSpeedSlider.value = beltSpeed;
 	}
 
 	public void SpawnPotion() {
@@ -53,6 +62,21 @@ public class Machine : MonoBehaviour {
 			if(true) {
 
 				Color targetColor = targetColors [0];
+				float bestGrade = -1f;
+				int bestIndex = -1;
+
+				for (int i = 0; i < targetColors.Count; i++) {
+					if (!recipesDone [i]) {
+						float colorGradeTest = potionToCheck.GradePotion (targetColors [i]);
+						float fillGradeTest = potionToCheck.FillGrade ();
+
+						if (colorGradeTest + fillGradeTest > bestGrade) {
+							bestGrade = colorGradeTest + fillGradeTest;
+							bestIndex = i;
+							targetColor = targetColors [i];
+						}
+					}
+				}
 
 				float colorGrade = potionToCheck.GradePotion (targetColor);
 				float fillGrade = potionToCheck.FillGrade ();
@@ -63,6 +87,8 @@ public class Machine : MonoBehaviour {
 
 					if (tutorialMode) {
 						frank.TutorialFail ();
+					} else {
+						Invoke ("ShowRecipeAgain", 3f);
 					}
 
 					Invoke ("BreakPotion", 1.0f);
@@ -75,6 +101,8 @@ public class Machine : MonoBehaviour {
 
 					if (tutorialMode) {
 						frank.TutorialFail ();
+					} else {
+						Invoke ("ShowRecipeAgain", 3f);
 					}
 
 					Invoke ("BreakPotion", 1.0f);
@@ -89,11 +117,20 @@ public class Machine : MonoBehaviour {
 					Invoke ("ShowNextRecipe", 3f);
 					tutorialMode = false;
 				} else {
-					Debug.Log (frank.bubble.potionImages [0].name);
-					frank.bubble.potionImages [0].done = true;
+					frank.bubble.potionImages [bestIndex].done = true;
+					recipesDone [bestIndex] = true;
+
+					if (recipesDone [0] && recipesDone [1] && recipesDone [2]) {
+						Invoke ("FinishRecipe", 1.75f);
+					}
 				}
 			}
 		}
+	}
+
+	private void FinishRecipe() {
+		frank.Say ("Good job!", 2f);
+		Invoke ("ShowNextRecipe", 3.5f);
 	}
 
 	private void BreakPotion() {
@@ -102,8 +139,19 @@ public class Machine : MonoBehaviour {
 		}
 	}
 
+	private void ShowRecipeAgain() {
+		frank.ShowRecipe (targetColors[0], targetColors[1], targetColors[2]);
+		for (int i = 0; i < 3; i++) {
+			frank.bubble.potionImages [i].done = recipesDone [i];
+		}
+	}
+
 	private void ShowNextRecipe() {
 		targetColors.Clear ();
+
+		recipesDone [0] = false;
+		recipesDone [1] = false;
+		recipesDone [2] = false;
 
 		targetColors.Add (Color.magenta);
 		targetColors.Add (Color.yellow);

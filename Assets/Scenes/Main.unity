@@ -3136,8 +3136,16 @@ MonoBehaviour:
     type: 2}
   potionSpawn: {fileID: 1839610267}
   frank: {fileID: 1844462275}
-  beltSpeed: 1
+  beltSpeed: 1.1
   beltSpeedSlider: {fileID: 1870309742}
+  rotators:
+  - {fileID: 682498438}
+  - {fileID: 1799290075}
+  - {fileID: 1478709309}
+  - {fileID: 475775270}
+  belts:
+  - {fileID: 1036316971}
+  - {fileID: 778718914}
 --- !u!4 &919842246
 Transform:
   m_ObjectHideFlags: 0
@@ -7058,10 +7066,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2123915553}
   m_HandleRect: {fileID: 1574681458}
   m_Direction: 1
-  m_MinValue: -2
-  m_MaxValue: 2
+  m_MinValue: -3
+  m_MaxValue: 3
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 1.25
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

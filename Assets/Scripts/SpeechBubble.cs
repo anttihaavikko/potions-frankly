@@ -59,7 +59,7 @@ public class SpeechBubble : MonoBehaviour {
 
 				done = true;
 
-				Invoke ("ShowPotions", 0.1f);
+				Invoke ("ShowPotions", 0.12f);
 			}
 
 //			if (!done && Input.GetButtonDown("Action")) {
@@ -81,6 +81,8 @@ public class SpeechBubble : MonoBehaviour {
 		numberOfPotions = 0;
 
 		for (int i = 0; i < potionImages.Length; i++) {
+			potionImages [i].check.localScale = Vector3.zero;
+			potionImages [i].done = false;
 			potionImages [i].gameObject.SetActive (false);
 		}
 	}

@@ -9,7 +9,7 @@ public class KeepRotating : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		angle += speed * Time.deltaTime;
+		angle += speed * Time.deltaTime * Machine.Instance.beltSpeed;
 		transform.localRotation = Quaternion.Euler (new Vector3 (0, 0, angle));
 	}
 }

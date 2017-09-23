@@ -15,10 +15,9 @@ public class PotionImage : MonoBehaviour {
 		check.localScale = Vector3.zero;
 	}
 
-	void Upodate() {
+	void Update() {
 		if (done) {
-			Debug.Log ("This is done");
-			check.localScale = Vector3.MoveTowards (check.localScale, checkSize, Time.deltaTime);
+			check.localScale = Vector3.MoveTowards (check.localScale, checkSize, Time.deltaTime * 100f);
 		}
 	}
 }
