@@ -14,6 +14,8 @@ public class Potion : MonoBehaviour {
 	private float bl = 0f, wh = 0f;
 	private int colorTotal = 0, amountTotal = 0;
 
+	public ParticleSystem breakPrefab;
+
 	// Use this for initialization
 	void Start () {
 		body = GetComponent<Rigidbody2D> ();
@@ -62,8 +64,14 @@ public class Potion : MonoBehaviour {
 		}
 	}
 
+	public void RemovePotion() {
+		Destroy (gameObject);
+	}
+
 	public void Break() {
 		Destroy (gameObject);
+		AudioManager.Instance.PlayEffectAt (10, transform.position, 1f);
+		Instantiate (breakPrefab, transform.position, Quaternion.identity);
 	}
 
 	private void AddColor(Color c) {

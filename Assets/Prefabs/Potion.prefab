@@ -221,6 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liquidSprite: {fileID: 212748289624288914}
   cork: {fileID: 1292547038073914}
+  breakPrefab: {fileID: 198648727319106374, guid: f302a19987410452dbf68022f11dfa4c,
+    type: 2}
 --- !u!212 &212312697199480788
 SpriteRenderer:
   m_ObjectHideFlags: 1

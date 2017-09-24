@@ -235,7 +235,7 @@ public class Machine : MonoBehaviour {
 
 	private void BreakPotion() {
 		if (potionToCheck) {
-			potionToCheck.Break ();
+			potionToCheck.RemovePotion ();
 		}
 	}
 
