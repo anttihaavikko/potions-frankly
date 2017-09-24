@@ -2821,6 +2821,7 @@ MonoBehaviour:
   - {fileID: 1870309740}
   coinTotalText: {fileID: 2019945655}
   coinEarningText: {fileID: 370641653}
+  strikes: 0
 --- !u!4 &919842246
 Transform:
   m_ObjectHideFlags: 0

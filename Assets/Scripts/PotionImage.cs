@@ -10,7 +10,7 @@ public class PotionImage : MonoBehaviour {
 
 	private Vector3 checkSize;
 
-	void Start() {
+	void Awake() {
 		checkSize = check.localScale;
 		check.localScale = Vector3.zero;
 	}

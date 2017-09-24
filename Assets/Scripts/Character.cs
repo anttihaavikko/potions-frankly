@@ -143,8 +143,11 @@ public class Character : MonoBehaviour {
 				messages.Add ("Job well done!");
 			} else {
 				Machine.Instance.strikes++;
+
 				messages.Add ("You didn't do too good today...");
 				messages.Add ("The net profit for the whole day was " + Machine.Instance.DailyCoin () + ".");
+
+				Debug.Log (Machine.Instance.strikes + " strikes");
 
 				if (Machine.Instance.strikes < 3) {
 					messages.Add ("You need to get it together or I'll have to let you go!");

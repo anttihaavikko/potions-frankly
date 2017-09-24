@@ -31,6 +31,7 @@ public class Machine : MonoBehaviour {
 
 	public Text coinTotalText, coinEarningText;
 	private int coinTotal = 0, coinEarning = 0, coinDaily = 0, coinShown = 0;
+
 	public int strikes = 0;
 
 	private static Machine instance = null;
@@ -63,6 +64,17 @@ public class Machine : MonoBehaviour {
 	void Update() {
 		coinShown = (int)Mathf.MoveTowards (coinShown, coinTotal, Mathf.Max(Mathf.Abs(coinShown - coinTotal) * 0.1f, 1f));
 		UpdateCoins ();
+
+		if (Application.isEditor) {
+			
+			if (Input.GetKeyDown (KeyCode.Space)) {
+				Time.timeScale = 5f;
+			}
+
+			if (Input.GetKeyUp (KeyCode.Space)) {
+				Time.timeScale = 1f;
+			}
+		}
 	}
 
 	public void SpawnPotion() {
