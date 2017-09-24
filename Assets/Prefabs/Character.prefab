@@ -1105,7 +1105,7 @@ Transform:
   - {fileID: 4152016261112516}
   m_Father: {fileID: 4304350463078314}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 149.79001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 149.791}
 --- !u!4 &4512050044683330
 Transform:
   m_ObjectHideFlags: 1
@@ -1233,7 +1233,7 @@ Transform:
   - {fileID: 4095600286705090}
   m_Father: {fileID: 4469023819957068}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 43.433002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 43.434002}
 --- !u!4 &4772885644542578
 Transform:
   m_ObjectHideFlags: 1
@@ -1429,6 +1429,27 @@ MonoBehaviour:
   cam: {fileID: 0}
   dimmer: {fileID: 0}
   isFrank: 1
+  skinSprites:
+  - {fileID: 212001515458933680}
+  - {fileID: 212319064770688250}
+  - {fileID: 212247533018335062}
+  - {fileID: 212034178370722446}
+  - {fileID: 212144774535783690}
+  - {fileID: 212614651474822940}
+  - {fileID: 212335319307317718}
+  - {fileID: 212487019410768646}
+  - {fileID: 212468824112726834}
+  - {fileID: 212940117799171634}
+  - {fileID: 212829917185157514}
+  skinColors:
+  - {r: 0.9705882, g: 0.8778114, b: 0.8778114, a: 1}
+  - {r: 0.86764705, g: 0.8343843, b: 0.6953936, a: 1}
+  - {r: 0.86764705, g: 0.71453285, b: 0.71453285, a: 1}
+  - {r: 0.58823526, g: 0.51187205, b: 0.41522488, a: 1}
+  - {r: 0.38235295, g: 0.31262976, b: 0.20804499, a: 1}
+  - {r: 0.89705884, g: 0.749308, b: 0.52768165, a: 1}
+  - {r: 0.89705884, g: 0.88686913, b: 0.52768165, a: 1}
+  - {r: 0.9764706, g: 0.93333334, b: 0.90588236, a: 1}
 --- !u!114 &114172864925266458
 MonoBehaviour:
   m_ObjectHideFlags: 1

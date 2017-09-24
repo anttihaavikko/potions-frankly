@@ -20,6 +20,9 @@ public class Character : MonoBehaviour {
 	private float outX = -38f, inX = -31.5f;
 	private float targetX = 0f;
 
+	public SpriteRenderer[] skinSprites;
+	public Color[] skinColors;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -30,7 +33,17 @@ public class Character : MonoBehaviour {
 		}
 	}
 
+	private void RandomizeSkin() {
+		
+		Color c = skinColors[Random.Range(0, skinColors.Length)];
+
+		for (int i = 0; i < skinSprites.Length; i++) {
+			skinSprites [i].color = c;
+		}
+	}
+
 	public void GoIn() {
+		RandomizeSkin ();
 		TurnAround ();
 		anim.SetBool ("walking", true);
 		Invoke ("CustomerEntry", 3f);
@@ -184,6 +197,7 @@ public class Character : MonoBehaviour {
 	}
 
 	void Update() {
+
 		if (isFrank) {
 			if (Input.GetMouseButtonDown (0)) {
 				if (bubble.done) {
