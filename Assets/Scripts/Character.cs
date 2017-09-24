@@ -75,9 +75,40 @@ public class Character : MonoBehaviour {
 			curMessage = 0;
 		}
 
-		// DAY 0 intro
+		// DAY 1 intro
 		if (Machine.Instance.day == 1) {
 			messages.Add ("First day! Are you excited?");
+			messages.Add ("Lets get to work...");
+			messages.Add ("START");
+			curMessage = 0;
+		}
+
+		// DAY 2 intro
+		if (Machine.Instance.day == 2) {
+			messages.Add ("Good morning!");
+			messages.Add ("I've installed few new ingredient pumps for you.");
+			messages.Add ("Now we can make those expensive mixes.");
+			messages.Add ("Time to get to work...");
+			messages.Add ("START");
+			curMessage = 0;
+			Machine.Instance.activateThese [0].SetActive (true);
+			Machine.Instance.activateThese [1].SetActive (true);
+		}
+
+		// DAY 3 intro
+		if (Machine.Instance.day == 3) {
+			messages.Add ("Good morning!");
+			messages.Add ("I've installed a speed control for the conveyor belt.");
+			messages.Add ("Now we can make potions faster and more precicely.");
+			messages.Add ("Lets give it a whirl and get to work...");
+			messages.Add ("START");
+			curMessage = 0;
+			Machine.Instance.activateThese [2].SetActive (true);
+		}
+
+		// DAY 4+ intro
+		if (Machine.Instance.day >= 4) {
+			messages.Add ("Good morning!");
 			messages.Add ("Lets get to work...");
 			messages.Add ("START");
 			curMessage = 0;
@@ -98,6 +129,14 @@ public class Character : MonoBehaviour {
 		if (Machine.Instance.day == 0) {
 			messages.Add ("Job well done!");
 			messages.Add ("Tomorrow we start serving actual customers.");
+			messages.Add ("See you in the morning!");
+			messages.Add ("FADE");
+			curMessage = 0;
+		}
+
+		// DAY 1+ outro
+		if (Machine.Instance.day >= 1) {
+			messages.Add ("Job well done!");
 			messages.Add ("See you in the morning!");
 			messages.Add ("FADE");
 			curMessage = 0;

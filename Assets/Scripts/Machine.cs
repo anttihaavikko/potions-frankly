@@ -27,6 +27,8 @@ public class Machine : MonoBehaviour {
 
 	public int day = 0;
 
+	public GameObject[] activateThese;
+
 	private static Machine instance = null;
 	public static Machine Instance {
 		get { return instance; }
@@ -93,7 +95,7 @@ public class Machine : MonoBehaviour {
 				float colorGrade = potionToCheck.GradePotion (targetColor);
 				float fillGrade = potionToCheck.FillGrade ();
 
-				if (fillGrade < 0.7f) {
+				if (fillGrade < 0.65f) {
 					frank.Say ("Not good enough!\nYou filled it to only " + (int)(fillGrade * 100) + "%.");
 					frank.Nope ();
 
@@ -107,7 +109,7 @@ public class Machine : MonoBehaviour {
 					return;
 				}
 
-				if (colorGrade < 0.8f) {
+				if (colorGrade < 0.85f) {
 					frank.Say ("Not good enough!\nYour ingredients were way off...");
 					frank.Nope ();
 
@@ -217,11 +219,42 @@ public class Machine : MonoBehaviour {
 	}
 
 	public Color GetRandomColor() {
+
+		if (day > 4) {
+			return new Color (Random.value, Random.value, Random.value);
+		}
+
 		List<Color> colors = new List<Color>();
 
 		colors.Add(Color.magenta);
 		colors.Add(Color.yellow);
 		colors.Add(Color.cyan);
+
+		if (day > 1) {
+			colors.Add (Color.white);
+
+			colors.Add (Color.Lerp (Color.red, Color.white, 0.5f));
+			colors.Add (Color.Lerp (Color.green, Color.white, 0.5f));
+			colors.Add (Color.Lerp (Color.blue, Color.white, 0.5f));
+
+			colors.Add (Color.Lerp (Color.magenta, Color.white, 0.5f));
+			colors.Add (Color.Lerp (Color.yellow, Color.white, 0.5f));
+			colors.Add (Color.Lerp (Color.cyan, Color.white, 0.5f));
+
+			colors.Add (Color.Lerp (Color.red, Color.black, 0.5f));
+			colors.Add (Color.Lerp (Color.green, Color.black, 0.5f));
+			colors.Add (Color.Lerp (Color.blue, Color.black, 0.5f));
+
+			colors.Add (Color.Lerp (Color.magenta, Color.black, 0.5f));
+			colors.Add (Color.Lerp (Color.yellow, Color.black, 0.5f));
+			colors.Add (Color.Lerp (Color.cyan, Color.black, 0.5f));
+		}
+
+		if (day > 2) {
+			colors.Add (Color.red);
+			colors.Add (Color.green);
+			colors.Add (Color.blue);
+		}
 
 		return colors [Random.Range (0, colors.Count)];
 	}

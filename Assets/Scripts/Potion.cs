@@ -10,7 +10,8 @@ public class Potion : MonoBehaviour {
 	private int colorAmount = 0;
 
 	private float r = 0f, g = 0f, b = 0f;
-	private int colorTotal = 0;
+	private float bl = 0f, wh = 0f;
+	private int colorTotal = 0, amountTotal = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -49,20 +50,42 @@ public class Potion : MonoBehaviour {
 	}
 
 	private void AddColor(Color c) {
+		amountTotal++;
 
-		colorTotal++;
+		if (c != Color.black && c != Color.white) {
+			colorTotal++;
+			r += c.r;
+			g += c.g;
+			b += c.b;
+		}
 
-		r += c.r;
-		g += c.g;
-		b += c.b;
+		if (c == Color.black) {
+			bl += 1f;
+		}
+
+		if (c == Color.white) {
+			wh += 1f;
+			liquidSprite.color = Color.white;
+		}
 
 		int colorNum = 0;
 		colorNum = (r > 0f) ? colorNum + 1 : colorNum;
 		colorNum = (g > 0f) ? colorNum + 1 : colorNum;
 		colorNum = (b > 0f) ? colorNum + 1 : colorNum;
 
-		liquidSprite.color = new Color(r/colorTotal*colorNum, g/colorTotal*colorNum, b/colorTotal*colorNum);
-		liquidSprite.size = new Vector2(1f, Mathf.Min(colorTotal * 0.0075f, 1f));
+		if (r > 0 || g > 0 || b > 0) {
+			liquidSprite.color = new Color (r / colorTotal * colorNum, g / colorTotal * colorNum, b / colorTotal * colorNum);
+		}
+
+		if (wh > 0) {
+			liquidSprite.color = Color.Lerp (liquidSprite.color, Color.white, wh / amountTotal);
+		}
+
+		if (bl > 0) {
+			liquidSprite.color = Color.Lerp (liquidSprite.color, Color.black, bl / amountTotal);
+		}
+
+		liquidSprite.size = new Vector2(1f, Mathf.Min(amountTotal * 0.0075f, 1f));
 	}
 
 	public float GradePotion(Color c) {
@@ -74,6 +97,6 @@ public class Potion : MonoBehaviour {
 	}
 
 	public float FillGrade() {
-		return Mathf.Min (colorTotal, 130) / 130f;
+		return Mathf.Min (amountTotal, 130) / 130f;
 	}
 }
