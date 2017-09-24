@@ -29,6 +29,10 @@ public class Machine : MonoBehaviour {
 
 	public GameObject[] activateThese;
 
+	public Text coinTotalText, coinEarningText;
+	private int coinTotal = 0, coinEarning = 0, coinDaily = 0, coinShown = 0;
+	public int strikes = 0;
+
 	private static Machine instance = null;
 	public static Machine Instance {
 		get { return instance; }
@@ -52,6 +56,13 @@ public class Machine : MonoBehaviour {
 		recipesDone [2] = true;
 
 		beltSpeedSlider.value = beltSpeed;
+
+		UpdateCoins ();
+	}
+
+	void Update() {
+		coinShown = (int)Mathf.MoveTowards (coinShown, coinTotal, Mathf.Max(Mathf.Abs(coinShown - coinTotal) * 0.1f, 1f));
+		UpdateCoins ();
 	}
 
 	public void SpawnPotion() {
@@ -94,6 +105,8 @@ public class Machine : MonoBehaviour {
 
 				float colorGrade = potionToCheck.GradePotion (targetColor);
 				float fillGrade = potionToCheck.FillGrade ();
+
+				Debug.Log ("Fill: " + fillGrade + " - Color: " + colorGrade);
 
 				if (fillGrade < 0.65f) {
 					frank.Say ("Not good enough!\nYou filled it to only " + (int)(fillGrade * 100) + "%.");
@@ -140,6 +153,9 @@ public class Machine : MonoBehaviour {
 					if (recipesDone [0] && recipesDone [1] && recipesDone [2]) {
 						Invoke ("FinishRecipe", 1.75f);
 						Invoke ("CustomerLeaves", 2f);
+
+						GetCoin (customerNumber * (100 + 50 * day));
+						AddEarnings ();
 
 						if (customerNumber < 3) {
 							Invoke ("CustomerEnters", 7f);
@@ -257,5 +273,46 @@ public class Machine : MonoBehaviour {
 		}
 
 		return colors [Random.Range (0, colors.Count)];
+	}
+
+	private void UpdateCoins() {
+		coinTotalText.text = coinShown.ToString ();
+		coinEarningText.text = "";
+
+		if (coinEarning != 0) {
+			coinEarningText.text = (coinEarning > 0) ? "+" : "";
+			coinEarningText.text += coinEarning.ToString ();
+		}
+	}
+
+	public void UseCoin(int amount) {
+		if (!tutorialMode) {
+			coinEarning -= amount;
+			UpdateCoins ();
+		}
+	}
+
+	public void GetCoin(int amount) {
+		coinEarning += amount;
+		UpdateCoins ();
+	}
+
+	public void AddEarnings() {
+		Invoke ("DoAddEarnings", 1f);
+	}
+
+	private void DoAddEarnings() {
+		coinDaily += coinEarning;
+		coinTotal += coinEarning;
+		coinEarning = 0;
+	}
+
+	public void ResetDaily() {
+		Debug.Log ("Daily earning: " + coinDaily);
+		coinDaily = 0;
+	}
+
+	public int DailyCoin() {
+		return coinDaily;
 	}
 }

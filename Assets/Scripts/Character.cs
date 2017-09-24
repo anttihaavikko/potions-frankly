@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour {
 
@@ -55,6 +56,7 @@ public class Character : MonoBehaviour {
 	public void DoIntro() {
 
 		Machine.Instance.canSpawn = false;
+		Machine.Instance.ResetDaily ();
 
 		cam.ZoomToStore ();
 
@@ -136,13 +138,35 @@ public class Character : MonoBehaviour {
 
 		// DAY 1+ outro
 		if (Machine.Instance.day >= 1) {
-			messages.Add ("Job well done!");
+
+			if (Machine.Instance.DailyCoin () >= 0) {
+				messages.Add ("Job well done!");
+			} else {
+				Machine.Instance.strikes++;
+				messages.Add ("You didn't do too good today...");
+				messages.Add ("The net profit for the whole day was " + Machine.Instance.DailyCoin () + ".");
+
+				if (Machine.Instance.strikes < 3) {
+					messages.Add ("You need to get it together or I'll have to let you go!");
+					messages.Add ("...");
+				} else {
+					messages.Add ("I have no other option...");
+					messages.Add ("You're fired!");
+					messages.Add ("GAMEOVER");
+				}
+			}
+
 			messages.Add ("See you in the morning!");
 			messages.Add ("FADE");
+
 			curMessage = 0;
 		}
 
 		ShowNextMessage ();
+	}
+
+	void GameOver() {
+		SceneManager.LoadSceneAsync ("GameOver");
 	}
 
 	void TurnAround() {
@@ -181,6 +205,10 @@ public class Character : MonoBehaviour {
 
 		if (messages [curMessage] == "TUTORIAL") {
 			TutorialRecipe ();
+		} else if (messages [curMessage] == "GAMEOVER") {
+			bubble.Hide ();
+			Invoke ("EndDay", 1.5f);
+			Invoke ("GameOver", 2.5f);
 		} else if (messages [curMessage] == "FADE") {
 			bubble.Hide ();
 			Invoke ("DoIntro", 7f);

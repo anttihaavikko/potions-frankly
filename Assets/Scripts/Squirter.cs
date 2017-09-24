@@ -21,6 +21,10 @@ public class Squirter : MonoBehaviour {
 		nuzzle.localScale = Vector3.MoveTowards (nuzzle.localScale, nuzzleSize, Time.deltaTime);
 	}
 
+	void OnMouseDrag() {
+		Machine.Instance.UseCoin (1);
+	}
+
 	void OnMouseDown() {
 		scaleSpeed = 2f;
 		liquid.localScale = new Vector3 (0f, 0f, 1f);
@@ -32,5 +36,6 @@ public class Squirter : MonoBehaviour {
 		scaleSpeed = 2f;
 		targetSize = new Vector3(0f, liquid.localScale.y, 1f);
 		nuzzleSize = Vector3.one;
+		Machine.Instance.AddEarnings ();
 	}
 }

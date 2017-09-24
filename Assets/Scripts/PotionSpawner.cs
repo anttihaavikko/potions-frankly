@@ -24,6 +24,8 @@ public class PotionSpawner : MonoBehaviour {
 		if (Machine.Instance.canSpawn) {
 			pipeSize = new Vector3 (0.9f, 1.1f, 1f);
 			Machine.Instance.SpawnPotion ();
+			Machine.Instance.UseCoin (10);
+			Machine.Instance.AddEarnings ();
 		}
 	}
 

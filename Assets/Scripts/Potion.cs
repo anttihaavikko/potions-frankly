@@ -50,6 +50,7 @@ public class Potion : MonoBehaviour {
 	}
 
 	private void AddColor(Color c) {
+
 		amountTotal++;
 
 		if (c != Color.black && c != Color.white) {
