@@ -36,6 +36,10 @@ public class Machine : MonoBehaviour {
 
 	public Animator corker;
 
+	public Text quitHelp;
+	private float quitHelpAlpha = 0f;
+	private float escHeldFor = 0f;
+
 	private static Machine instance = null;
 	public static Machine Instance {
 		get { return instance; }
@@ -67,6 +71,23 @@ public class Machine : MonoBehaviour {
 		coinShown = (int)Mathf.MoveTowards (coinShown, coinTotal, Mathf.Max(Mathf.Abs(coinShown - coinTotal) * 0.1f, 1f));
 		UpdateCoins ();
 
+		quitHelpAlpha = Mathf.MoveTowards (quitHelpAlpha, 0f, Time.deltaTime);
+		quitHelp.color = new Color (1f, 1f, 1f, Mathf.Min(quitHelpAlpha, 1f));
+
+		if (Input.GetKey (KeyCode.Escape)) {
+			escHeldFor += Time.deltaTime;
+
+			if (escHeldFor >= 1f) {
+				Application.Quit ();
+				Debug.Log ("Quit...");
+			}
+		}
+
+		if (Input.GetKeyUp (KeyCode.Escape)) {
+			escHeldFor = 0f;
+			ShowQuitHelp ();
+		}
+
 		if (Application.isEditor) {
 			
 			if (Input.GetKeyDown (KeyCode.Space)) {
@@ -77,6 +98,10 @@ public class Machine : MonoBehaviour {
 				Time.timeScale = 1f;
 			}
 		}
+	}
+
+	public void ShowQuitHelp() {
+		quitHelpAlpha = 3f;
 	}
 
 	public void StampCork() {
