@@ -10,9 +10,12 @@ public class Squirter : MonoBehaviour {
 	private float scaleSpeed = 10f;
 	private Vector3 nuzzleSize;
 
+	public ParticleSystem stream;
+
 	// Use this for initialization
 	void Start () {
 		nuzzleSize = nuzzle.localScale;
+		stream.Stop ();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +36,8 @@ public class Squirter : MonoBehaviour {
 		nuzzleSize = new Vector3 (0.9f, 1.1f, 1f);
 
 		AudioManager.Instance.PlayEffectAt (5, transform.position, 1f);
+
+		stream.Play ();
 	}
 
 	void OnMouseUp() {
@@ -40,5 +45,6 @@ public class Squirter : MonoBehaviour {
 		targetSize = new Vector3(0f, liquid.localScale.y, 1f);
 		nuzzleSize = Vector3.one;
 		Machine.Instance.AddEarnings ();
+		stream.Stop ();
 	}
 }

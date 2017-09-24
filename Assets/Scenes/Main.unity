@@ -3945,6 +3945,21 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50d316f9b5b134853bf454e2bd0233cf, type: 2}
   m_IsPrefabParent: 0
@@ -4333,6 +4348,21 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -0.31
       objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: randomSeed
+      value: 2078855272
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50d316f9b5b134853bf454e2bd0233cf, type: 2}
   m_IsPrefabParent: 0
@@ -4417,7 +4447,7 @@ GameObject:
   - component: {fileID: 1168109622}
   - component: {fileID: 1168109621}
   - component: {fileID: 1168109620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Belt Trigger
   m_TagString: Belt
   m_Icon: {fileID: 0}
@@ -4728,6 +4758,21 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 4dbc423c7f5a5451bb574b766e4556bb,
         type: 3}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50d316f9b5b134853bf454e2bd0233cf, type: 2}
   m_IsPrefabParent: 0
@@ -5965,6 +6010,21 @@ Prefab:
     - target: {fileID: 4694166830320954, guid: 50d316f9b5b134853bf454e2bd0233cf, type: 2}
       propertyPath: m_LocalPosition.y
       value: -0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: randomSeed
+      value: 2078855272
+      objectReference: {fileID: 0}
+    - target: {fileID: 198535379366275150, guid: 50d316f9b5b134853bf454e2bd0233cf,
+        type: 2}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50d316f9b5b134853bf454e2bd0233cf, type: 2}
