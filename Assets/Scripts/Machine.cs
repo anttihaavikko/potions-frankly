@@ -65,6 +65,8 @@ public class Machine : MonoBehaviour {
 		beltSpeedSlider.value = beltSpeed;
 
 		UpdateCoins ();
+
+		Application.targetFrameRate = 60;
 	}
 
 	void Update() {
