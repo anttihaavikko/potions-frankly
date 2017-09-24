@@ -180,6 +180,8 @@ public class Machine : MonoBehaviour {
 					return;
 				}
 
+				AudioManager.Instance.PlayEffectAt (0, frank.transform.position, 1f);
+
 				frank.ThumbsUp ();
 				Invoke ("BreakPotion", 1.5f);
 

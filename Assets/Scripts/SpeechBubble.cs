@@ -54,7 +54,7 @@ public class SpeechBubble : MonoBehaviour {
 
 			if (audioSource && letter != " " && letter != "." && letter != "!"  && letter != "?") {
 				audioSource.pitch = Random.Range (0.8f, 1.2f);
-				audioSource.PlayOneShot (audioSource.clip, 1f);
+				audioSource.PlayOneShot (audioSource.clip, 0.15f);
 			}
 
 			if (messagePos >= message.Length) {
@@ -76,6 +76,11 @@ public class SpeechBubble : MonoBehaviour {
 	}
 
 	public void ShowSpeech(string str) {
+
+		if (closeClip) {
+			audioSource.PlayOneShot (closeClip, 1f);
+		}
+
 		done = false;
 		shown = true;
 		message = str;

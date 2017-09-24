@@ -22,6 +22,9 @@ public class PotionSpawner : MonoBehaviour {
 
 	void OnMouseDown() {
 		if (Machine.Instance.canSpawn) {
+
+			AudioManager.Instance.PlayEffectAt (1, transform.position, 1f);
+
 			pipeSize = new Vector3 (0.9f, 1.1f, 1f);
 			Machine.Instance.SpawnPotion ();
 			Machine.Instance.UseCoin (10);

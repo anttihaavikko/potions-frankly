@@ -23,6 +23,7 @@ public class Squirter : MonoBehaviour {
 
 	void OnMouseDrag() {
 		Machine.Instance.UseCoin (1);
+		AudioManager.Instance.PlayEffectAt (6, transform.position + Vector3.down * 2f, 0.3f);
 	}
 
 	void OnMouseDown() {
@@ -30,6 +31,8 @@ public class Squirter : MonoBehaviour {
 		liquid.localScale = new Vector3 (0f, 0f, 1f);
 		targetSize = new Vector3 (0.5f, 0.5f, 1f);
 		nuzzleSize = new Vector3 (0.9f, 1.1f, 1f);
+
+		AudioManager.Instance.PlayEffectAt (5, transform.position, 1f);
 	}
 
 	void OnMouseUp() {

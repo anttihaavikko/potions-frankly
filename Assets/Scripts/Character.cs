@@ -41,11 +41,18 @@ public class Character : MonoBehaviour {
 		TurnAround ();
 		anim.SetBool ("walking", true);
 		targetX = outX;
+		AudioManager.Instance.PlayEffectAt (7, transform.position, 1f);
+		Invoke ("StopWalking", 3f);
+	}
+
+	private void StopWalking() {
+		anim.SetBool ("walking", false);
 	}
 
 	private void CustomerEntry() {
 		anim.SetBool ("walking", false);
 		anim.SetTrigger ("thumbsup");
+		AudioManager.Instance.PlayEffectAt (7, transform.position, 1f);
 		Invoke ("DoOrder", 3f);
 	}
 
@@ -196,12 +203,18 @@ public class Character : MonoBehaviour {
 	}
 
 	private void EndDay() {
+		AudioManager.Instance.PlayEffectAt (8, transform.position, 1f);
 		dimmer.gameObject.SetActive (true);
 		dimmer.FadeIn (1f);
 	}
 
 	private void StartDay() {
+		AudioManager.Instance.PlayEffectAt (8, transform.position, 1f);
 		dimmer.FadeOut (2f);
+	}
+
+	private void Footstep() {
+		AudioManager.Instance.PlayEffectAt (9, transform.position, 0.3f);
 	}
 
 	private void ShowNextMessage() {
