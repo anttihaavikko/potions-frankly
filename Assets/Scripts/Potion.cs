@@ -14,6 +14,8 @@ public class Potion : MonoBehaviour {
 	private float bl = 0f, wh = 0f;
 	private int colorTotal = 0, amountTotal = 0;
 
+	private int speedMod = 2;
+
 	public ParticleSystem breakPrefab;
 
 	// Use this for initialization
@@ -53,7 +55,7 @@ public class Potion : MonoBehaviour {
 	void OnTriggerStay2D(Collider2D trigger) {
 		if (trigger.tag == "Belt") {
 			
-			float xVel = Mathf.MoveTowards (body.velocity.x, -Machine.Instance.beltSpeed, Time.deltaTime * 5f);
+			float xVel = Mathf.MoveTowards (body.velocity.x, -Machine.Instance.beltSpeed * speedMod, Time.deltaTime * 5f);
 			body.velocity = new Vector2(xVel, body.velocity.y);
 
 //			body.AddForce(Vector2.left, ForceMode2D.Force);
@@ -76,21 +78,21 @@ public class Potion : MonoBehaviour {
 
 	private void AddColor(Color c) {
 
-		amountTotal++;
+		amountTotal += speedMod;
 
 		if (c != Color.black && c != Color.white) {
-			colorTotal++;
-			r += c.r;
-			g += c.g;
-			b += c.b;
+			colorTotal += speedMod;
+			r += c.r * speedMod;
+			g += c.g * speedMod;
+			b += c.b * speedMod;
 		}
 
 		if (c == Color.black) {
-			bl += 1f;
+			bl += 1f * speedMod;
 		}
 
 		if (c == Color.white) {
-			wh += 1f;
+			wh += 1f * speedMod;
 			liquidSprite.color = Color.white;
 		}
 
