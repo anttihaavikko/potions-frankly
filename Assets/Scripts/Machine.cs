@@ -34,6 +34,8 @@ public class Machine : MonoBehaviour {
 
 	public int strikes = 0;
 
+	public Animator corker;
+
 	private static Machine instance = null;
 	public static Machine Instance {
 		get { return instance; }
@@ -75,6 +77,11 @@ public class Machine : MonoBehaviour {
 				Time.timeScale = 1f;
 			}
 		}
+	}
+
+	public void StampCork() {
+		corker.ResetTrigger ("cork");
+		corker.SetTrigger ("cork");
 	}
 
 	public void SpawnPotion() {

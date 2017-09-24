@@ -8,6 +8,7 @@ TagManager:
   - Potion
   - Liquid
   - PotionCheck
+  - Corker
   layers:
   - Default
   - TransparentFX

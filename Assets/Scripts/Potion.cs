@@ -6,6 +6,7 @@ public class Potion : MonoBehaviour {
 
 	private Rigidbody2D body;
 	public SpriteRenderer liquidSprite;
+	public GameObject cork;
 	private float colorTimer = 2f;
 	private int colorAmount = 0;
 
@@ -29,6 +30,15 @@ public class Potion : MonoBehaviour {
 		if (trigger.tag == "PotionCheck") {
 			Machine.Instance.CheckPotion (this);
 		}
+
+		if (trigger.tag == "Corker") {
+			Machine.Instance.StampCork ();
+			Invoke ("AddCork", 0.1f);
+		}
+	}
+
+	private void AddCork() {
+		cork.SetActive (true);
 	}
 
 	void OnTriggerStay2D(Collider2D trigger) {
