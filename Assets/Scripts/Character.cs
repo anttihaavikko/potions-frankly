@@ -123,7 +123,7 @@ public class Character : MonoBehaviour {
 			curMessage = 0;
 		}
 
-		ShowNextMessage ();
+		Invoke ("ShowNextMessage", 1f);
 	}
 
 	public void DoOutro() {

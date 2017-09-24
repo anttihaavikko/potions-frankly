@@ -29,7 +29,7 @@ public class Potion : MonoBehaviour {
 		}
 
 		if (coll.relativeVelocity.magnitude > 3f) {
-			AudioManager.Instance.PlayEffectAt (4, transform.position, 1f);
+			AudioManager.Instance.PlayEffectAt (4, transform.position, 1.2f);
 		}
 	}
 
@@ -41,13 +41,13 @@ public class Potion : MonoBehaviour {
 		if (trigger.tag == "Corker") {
 			Machine.Instance.StampCork ();
 			Invoke ("AddCork", 0.1f);
-			AudioManager.Instance.PlayEffectAt (2, Machine.Instance.corker.transform.position, 1f);
+			AudioManager.Instance.PlayEffectAt (2, Machine.Instance.corker.transform.position, 1.5f);
 		}
 	}
 
 	private void AddCork() {
 		cork.SetActive (true);
-		AudioManager.Instance.PlayEffectAt (3, transform.position, 1f);
+		AudioManager.Instance.PlayEffectAt (3, transform.position, 1.5f);
 	}
 
 	void OnTriggerStay2D(Collider2D trigger) {
